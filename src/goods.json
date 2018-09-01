@@ -3,36 +3,42 @@
         "name": "good1",
         "id": "good1",
         "price": 100,
-        "description": "description"
+        "description": "description",
+        "quantity": 1
     },
     {
         "name": "good2",
         "id": "good2",
         "price": 100,
-        "description": "description"
+        "description": "description",
+        "quantity": 2
     },
     {
         "name": "good3",
         "id": "good3",
         "price": 100,
-        "description": "description"
+        "description": "description",
+        "quantity": 3
     },
     {
         "name": "good4",
         "id": "good4",
         "price": 100,
-        "description": "description"
+        "description": "description",
+        "quantity": 4
     },
     {
         "name": "good5",
         "id": "good5",
         "price": 100,
-        "description": "description"
+        "description": "description",
+        "quantity": 5
     },
     {
         "name": "good6",
         "id": "good6",
         "price": 100,
-        "description": "description"
+        "description": "description",
+        "quantity": 6
     }
 ]
