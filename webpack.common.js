@@ -1,6 +1,5 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -13,7 +12,14 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader','eslint-loader']
+        use: ['babel-loader', 'eslint-loader']
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'file-loader',
+        options: {
+          name: 'images/[name].[ext]'
+        }
       }
     ]
   },
@@ -23,8 +29,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'React Trainings',
-      template: "./src/index.ejs",
-      inject: "body"
-    }),
+      template: './src/index.ejs',
+      inject: 'body'
+    })
   ]
 };

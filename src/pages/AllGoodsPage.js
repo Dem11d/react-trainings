@@ -1,23 +1,23 @@
 import React from 'react';
 import Good from '../elements/Good';
-import { withStyles } from '@material-ui/core';
-import propTypes from 'prop-types';
 import {Consumer} from '../components/ApplicationContext';
+import styled from 'styled-components';
 
-const styles = {
-  goods: {
-    display: 'flex',
-    'flex-direction': 'row',
-    'flex-wrap': 'wrap'
-  }
-};
+const Wrapper = styled.div`
+  max-width: 1920px;
+`;
+
+const GoodsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
 
 function AllGoods (props) {
-  const {classes} = props;
   return (
-    <div>
+    <Wrapper>
       <p>All Goods</p>
-      <div className={classes.goods}>
+      <GoodsContainer>
         <Consumer>
           {({state: {goods}}) => (
             goods.map(good => {
@@ -33,12 +33,9 @@ function AllGoods (props) {
             })
           )}
         </Consumer>
-      </div>
-    </div>
+      </GoodsContainer>
+    </Wrapper>
   );
 }
-AllGoods.propTypes = {
-  classes: propTypes.object
-};
 
-export default withStyles(styles)(AllGoods);
+export default AllGoods;

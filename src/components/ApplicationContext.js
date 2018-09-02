@@ -25,10 +25,30 @@ export class Provider extends Component {
     setTimeout(console.log(this.state), 2000);
   }
 
-  getGoodById = (goodId, source = 'goods') => {
-    if (source) {
-      source = this.state[source];
+  discardBuyGood (goodId, quantity) {
+    const good = this.getGoodById(goodId);
+    let buyedGood = this.getGoodById(goodId, 'buyedGoods');
+    quantity = quantity > buyedGood.quantity ? buyedGood.quantity : quantity;
+    const updatedBuyedGood = ((quantity, buyedGood) => {
+      if (quantity >= buyedGood.quantity) { return null; }
+      return {id: good.id,
+        quantity: buyedGood.quantity - quantity};
+    })(quantity, buyedGood);
+    if (updatedBuyedGood) {
+      this.updateOrCreateGoodById(goodId, updatedBuyedGood, 'buyedGoods');
+    } else {
+      this.removeGoodById(goodId, 'buyedGoods');
     }
+
+    this.updateOrCreateGoodById(goodId, {quantity: good.quantity + quantity});
+  }
+
+  removeGoodById = (id, source = 'goods') => {
+    source = this.state[source];
+    this.setState((state) => ({[source]: state[source].filter(good => good.id !== id)}));
+  }
+  getGoodById = (goodId, source = 'goods') => {
+    source = this.state[source];
     let filteredGoods = source.filter(good => good.id === goodId);
     // if there is more then one good, will be returned first one
     if (filteredGoods.length > 0) {
@@ -63,7 +83,8 @@ export class Provider extends Component {
     return (<ApplicationContext.Provider value={{
       state: this.state,
       actions: {
-        buyGood: this.buyGood
+        buyGood: this.buyGood,
+        getGoodById: this.getGoodById
       }
     }}>
       {this.props.children}
