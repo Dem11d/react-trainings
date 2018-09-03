@@ -1,5 +1,6 @@
 import React from 'react';
 import {Consumer} from '../components/ApplicationContext';
+import CartGood from '../elements/CartGood';
 
 export default function Cart () {
   return (
@@ -7,14 +8,10 @@ export default function Cart () {
       <p>Cart page</p>
       <Consumer>
         {({state: {buyedGoods}, actions: {getGoodById}}) => {
-          console.log(buyedGoods);
           return buyedGoods.map(cartGood => {
             const good = getGoodById(cartGood.id);
             return (
-              <div key={good.id}>
-                <p>Name: <span>{good.name}</span></p>
-                <p>Quantity: {cartGood.quantity}</p>
-              </div>
+              <CartGood key={good.id} {...cartGood} {...good} />
             );
           });
         }}
