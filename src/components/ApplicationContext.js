@@ -25,7 +25,7 @@ export class Provider extends Component {
     setTimeout(console.log(this.state), 2000);
   }
 
-  discardBuyGood (goodId, quantity) {
+  discardBuyGood = (goodId, quantity) => {
     const good = this.getGoodById(goodId);
     let buyedGood = this.getGoodById(goodId, 'buyedGoods');
     quantity = quantity > buyedGood.quantity ? buyedGood.quantity : quantity;
@@ -43,9 +43,8 @@ export class Provider extends Component {
     this.updateOrCreateGoodById(goodId, {quantity: good.quantity + quantity});
   }
 
-  removeGoodById = (id, source = 'goods') => {
-    source = this.state[source];
-    this.setState((state) => ({[source]: state[source].filter(good => good.id !== id)}));
+  removeGoodById = (id, sourceName = 'goods') => {
+    this.setState((state) => ({[sourceName]: state[sourceName].filter(good => good.id !== id)}));
   }
   getGoodById = (goodId, source = 'goods') => {
     source = this.state[source];
@@ -79,14 +78,15 @@ export class Provider extends Component {
   static propTypes = {
     children: PropTypes.node
   }
+
+  actions={
+    buyGood: this.buyGood,
+    getGoodById: this.getGoodById,
+    discardBuyGood: this.discardBuyGood
+  };
+
   render () {
-    return (<ApplicationContext.Provider value={{
-      state: this.state,
-      actions: {
-        buyGood: this.buyGood,
-        getGoodById: this.getGoodById
-      }
-    }}>
+    return (<ApplicationContext.Provider value={{state: this.state, actions: this.actions}}>
       {this.props.children}
     </ApplicationContext.Provider>);
   }

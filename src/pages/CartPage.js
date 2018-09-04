@@ -11,7 +11,7 @@ export default function Cart () {
           return buyedGoods.map(cartGood => {
             const good = getGoodById(cartGood.id);
             return (
-              <CartGood key={good.id} {...cartGood} {...good} />
+              <CartGood key={good.id} {...good} {...cartGood}/>
             );
           });
         }}
