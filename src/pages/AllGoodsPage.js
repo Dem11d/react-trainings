@@ -1,11 +1,7 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Good from '../elements/Good';
-import {Consumer} from '../components/ApplicationContext';
+import {WithApplicationContext} from '../components/ApplicationContext';
 import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  max-width: 1920px;
-`;
 
 const GoodsContainer = styled.div`
   display: flex;
@@ -14,28 +10,21 @@ const GoodsContainer = styled.div`
 `;
 
 function AllGoods (props) {
+  const {state: {goods}, actions: {buyGood}} = props.context;
   return (
-    <Wrapper>
+    <Fragment>
       <p>All Goods</p>
       <GoodsContainer>
-        <Consumer>
-          {({state: {goods}}) => (
-            goods.map(good => {
-              return (
-                <div key={good.id}>
-                  <Consumer>
-                    {({state, actions: {buyGood}}) => {
-                      return <Good good={good} onBuy={buyGood}/>;
-                    }}
-                  </Consumer>
-                </div>
-              );
-            })
-          )}
-        </Consumer>
+        {goods.map(good => {
+          return (
+            <div key={good.id}>
+              <Good good={good} onBuy={buyGood}/>
+            </div>
+          );
+        })}
       </GoodsContainer>
-    </Wrapper>
+    </Fragment>
   );
 }
 
-export default AllGoods;
+export default WithApplicationContext(AllGoods);

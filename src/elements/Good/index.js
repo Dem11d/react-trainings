@@ -1,24 +1,26 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import {Button} from 'react-materialize';
 import styled from 'styled-components';
 import defaultImage from './default.gif';
+import Button from '../Button';
 
 const Card = styled.div`
   display:flex;
   flex-direction:column;
   background-color: #999;
   margin: 15px;
-  padding: 15px 0;
-  border: 1px solid #333;
+  padding: 0;
   border-radius: 15px;
+  border: 1px solid rgba(0,0,0,0.01);
+  box-shadow: 0 4px 12px 0px rgba(0,0,0,.25);
+  overflow: hidden
 `;
 
 const Thumbnail = styled.img`
   width:230px;
 `;
 
-function Good (props) {
+const Good = (props) => {
   const {good, onBuy} = props;
   return (
     <Card>
@@ -32,7 +34,7 @@ function Good (props) {
     </Card>
 
   );
-}
+};
 
 Good.propTypes = {
   good: propTypes.object,

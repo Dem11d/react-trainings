@@ -1,21 +1,36 @@
-import React from 'react';
-import {Consumer} from '../components/ApplicationContext';
+import React, {Fragment} from 'react';
+import {WithApplicationContext} from '../components/ApplicationContext';
 import CartGood from '../elements/CartGood';
+import {Link} from 'react-router-dom';
+import styled from 'styled-components';
+import { Navigation } from '../components/NavBar';
 
-export default function Cart () {
+const SubmitOrderContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+`;
+
+const Cart = (props) => {
+  const {state: {buyedGoods}, actions: {getGoodById}} = props.context;
   return (
     <div>
       <p>Cart page</p>
-      <Consumer>
-        {({state: {buyedGoods}, actions: {getGoodById}}) => {
-          return buyedGoods.map(cartGood => {
-            const good = getGoodById(cartGood.id);
-            return (
-              <CartGood key={good.id} {...good} {...cartGood}/>
-            );
-          });
-        }}
-      </Consumer>
+      {buyedGoods.length > 0
+        ? <Fragment>
+          {buyedGoods.map(cartGood => (
+            <CartGood key={cartGood.id} {...getGoodById(cartGood.id)} {...cartGood}/>
+          ))}
+          <SubmitOrderContainer>
+            <Navigation>
+              <Link to="/submit">Submit</Link>
+            </Navigation>
+          </SubmitOrderContainer>
+        </Fragment>
+        : (<p>No goods in cart</p>)
+      }
     </div>
   );
-}
+};
+
+export default WithApplicationContext(Cart);

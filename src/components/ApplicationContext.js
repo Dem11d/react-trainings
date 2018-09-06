@@ -9,6 +9,7 @@ export class Provider extends Component {
     buyedGoods: [],
     goods: goods
   }
+
   buyGood = (goodId, quantity) => {
     // find required good
     const good = this.getGoodById(goodId);
@@ -46,6 +47,7 @@ export class Provider extends Component {
   removeGoodById = (id, sourceName = 'goods') => {
     this.setState((state) => ({[sourceName]: state[sourceName].filter(good => good.id !== id)}));
   }
+
   getGoodById = (goodId, source = 'goods') => {
     source = this.state[source];
     let filteredGoods = source.filter(good => good.id === goodId);
@@ -91,5 +93,13 @@ export class Provider extends Component {
     </ApplicationContext.Provider>);
   }
 }
+
+export const WithApplicationContext = (WrappedComponent) => {
+  return class WithApplicationContext extends Component {
+    render () {
+      return (<Consumer>{(context) => (<WrappedComponent {...this.props} context={context}/>)}</Consumer>);
+    }
+  };
+};
 
 export const Consumer = ApplicationContext.Consumer;
