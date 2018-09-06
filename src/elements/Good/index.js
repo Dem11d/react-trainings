@@ -10,7 +10,7 @@ const Card = styled.div`
   background-color: #999;
   margin: 15px;
   padding: 0;
-  border-radius: 15px;
+  border-radius: 10px;
   border: 1px solid rgba(0,0,0,0.01);
   box-shadow: 0 4px 12px 0px rgba(0,0,0,.25);
   overflow: hidden
@@ -27,7 +27,7 @@ const Good = (props) => {
       <Thumbnail src={defaultImage} alt="default image"/>
       <p>{good.name}</p>
       <p>{good.description}</p>
-
+      <p>{good.price}$</p>
       {good.quantity === 0 ? <p>Out of stock</p>
         : <Button onClick={() => onBuy(good.id, 1)}>Buy one</Button>
       }

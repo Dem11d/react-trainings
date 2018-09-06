@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import PropTypes from 'prop-types';
 import {WithApplicationContext} from '../components/ApplicationContext';
 import CartGood from '../elements/CartGood';
 import {Link} from 'react-router-dom';
@@ -23,7 +24,7 @@ const Cart = (props) => {
           ))}
           <SubmitOrderContainer>
             <Navigation>
-              <Link to="/submit">Submit</Link>
+              <Link to="/submit">Place order</Link>
             </Navigation>
           </SubmitOrderContainer>
         </Fragment>
@@ -31,6 +32,10 @@ const Cart = (props) => {
       }
     </div>
   );
+};
+
+Cart.propTypes = {
+  context: PropTypes.object
 };
 
 export default WithApplicationContext(Cart);

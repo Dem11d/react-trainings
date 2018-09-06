@@ -12,6 +12,7 @@ const StyledButton = styled.button`
   text-transform: uppercase;
   display: inline-block;
   font-size: 16px;
+  border-radius: 10px;
   }
 
   &:active{
@@ -20,8 +21,6 @@ const StyledButton = styled.button`
 `;
 
 export default function Button (props) {
-  console.log(props);
-
   return (
     <StyledButton {...props} >{props.children}</StyledButton>
   );

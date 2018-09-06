@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import PropTypes from 'prop-types';
 import Good from '../elements/Good';
 import {WithApplicationContext} from '../components/ApplicationContext';
 import styled from 'styled-components';
@@ -26,5 +27,9 @@ function AllGoods (props) {
     </Fragment>
   );
 }
+
+AllGoods.propTypes = {
+  context: PropTypes.object
+};
 
 export default WithApplicationContext(AllGoods);

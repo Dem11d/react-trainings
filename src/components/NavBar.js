@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { WithApplicationContext } from './ApplicationContext';
+import PropTypes from 'prop-types';
 
 const NavBarContainer = styled.div`
   display: flex;
@@ -42,6 +43,10 @@ const NavBar = (props) => {
       </Navigation> */}
     </NavBarContainer>
   );
+};
+
+NavBar.propTypes = {
+  context: PropTypes.object
 };
 
 export default WithApplicationContext(NavBar);
