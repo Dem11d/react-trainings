@@ -9,6 +9,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   max-width: 1920px;
+  margin: 0 auto;
 `;
 
 const App = (props) => {

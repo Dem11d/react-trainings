@@ -17,7 +17,7 @@ const OveralSumContainer = styled.div`
 `;
 
 const SubmitPage = (props) => {
-  const {state: {buyedGoods}, actions: {getGoodById}} = props.context;
+  const {state: {buyedGoods, goods}, actions: {getGoodById}} = props.context;
   return (
     <div>
       <p>Submit page</p>
@@ -28,7 +28,7 @@ const SubmitPage = (props) => {
         <p>Total price</p>
       </Header>
       {buyedGoods.map((good) => (
-        <SubmitGood key={good.id} {...getGoodById(good.id)} {...good}/>
+        <SubmitGood key={good.id} {...goods.find((originalGood) => good.id === originalGood.id)} {...good}/>
       ))}
       <OveralSumContainer>
         <p>Total:

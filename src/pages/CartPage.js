@@ -13,14 +13,14 @@ const SubmitOrderContainer = styled.div`
 `;
 
 const Cart = (props) => {
-  const {state: {buyedGoods}, actions: {getGoodById}} = props.context;
+  const {state: {buyedGoods, goods}} = props.context;
   return (
     <div>
       <p>Cart page</p>
       {buyedGoods.length > 0
         ? <Fragment>
           {buyedGoods.map(cartGood => (
-            <CartGood key={cartGood.id} {...getGoodById(cartGood.id)} {...cartGood}/>
+            <CartGood key={cartGood.id} {...goods.find((good) => good.id === cartGood.id)} {...cartGood}/>
           ))}
           <SubmitOrderContainer>
             <Navigation>
