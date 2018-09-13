@@ -1,8 +1,8 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import AllGoodsPage from '../pages/AllGoodsPage';
-import CartPage from '../pages/CartPage';
-import SubmitPage from '../pages/SubmitPage';
+import AllGoodsPage from '../pages/AllGoods';
+import CartPage from '../pages/Cart';
+import SubmitPage from '../pages/Submit';
 import {Provider} from '../components/ApplicationContext';
 import NavBar from './NavBar';
 import styled from 'styled-components';

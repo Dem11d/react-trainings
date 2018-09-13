@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { WithApplicationContext } from '../components/ApplicationContext';
-import { SubmitGood } from '../elements/SubmitGood';
+import { WithApplicationContext } from '../../components/ApplicationContext';
+import { SubmitGood } from '../../elements/SubmitGood';
 import styled from 'styled-components';
 
 const Header = styled.div`
@@ -17,7 +17,7 @@ const OveralSumContainer = styled.div`
 `;
 
 const SubmitPage = (props) => {
-  const {state: {buyedGoods, goods}, actions: {getGoodById}} = props.context;
+  const {cart, goods} = props;
   return (
     <div>
       <p>Submit page</p>
@@ -27,13 +27,13 @@ const SubmitPage = (props) => {
         <p>Price</p>
         <p>Total price</p>
       </Header>
-      {buyedGoods.map((good) => (
+      {cart.map((good) => (
         <SubmitGood key={good.id} {...goods.find((originalGood) => good.id === originalGood.id)} {...good}/>
       ))}
       <OveralSumContainer>
         <p>Total:
-          {(buyedGoods.reduce((prev, curr) => {
-            return prev + getGoodById(curr.id).price * curr.quantity;
+          {(cart.reduce((prev, curr) => {
+            return prev + goods.find((good) => good.id === curr.id).price * curr.quantity;
           }, 0))}
         </p>
       </OveralSumContainer>
@@ -42,7 +42,8 @@ const SubmitPage = (props) => {
 };
 
 SubmitPage.propTypes = {
-  context: PropTypes.object
+  cart: PropTypes.array,
+  goods: PropTypes.array
 };
 
 export default WithApplicationContext(SubmitPage);

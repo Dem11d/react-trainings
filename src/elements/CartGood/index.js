@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import defaultImage from './default.gif';
-import { Consumer } from '../../components/ApplicationContext';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 
@@ -21,22 +20,23 @@ const Thumbnail = styled.img`
     height:100px;
 `;
 
-export default function CartGood ({quantity, name, id}) {
+const CartGood = ({quantity, name, id, discardBuyGood}) => {
   return (
     <Card>
       <Thumbnail src={defaultImage} alt="default image"/>
       <p>{name}</p>
       <p>Quantity: {quantity}</p>
       <p>test text</p>
-      <Consumer>
-        {({actions: {discardBuyGood}}) => (<Button onClick={() => discardBuyGood(id, quantity)}>Delete</Button>)}
-      </Consumer>
+      <Button onClick={() => discardBuyGood(id, quantity)}>Delete</Button>
     </Card>
   );
-}
+};
 
 CartGood.propTypes = {
   quantity: PropTypes.number,
   name: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  discardBuyGood: PropTypes.func
 };
+
+export default CartGood;

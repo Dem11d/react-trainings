@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import Good from '../elements/Good';
-import {WithApplicationContext} from '../components/ApplicationContext';
+import Good from '../../elements/Good';
 import styled from 'styled-components';
 
 const GoodsContainer = styled.div`
@@ -11,7 +10,8 @@ const GoodsContainer = styled.div`
 `;
 
 function AllGoods (props) {
-  const {state: {goods}, actions: {buyGood}} = props.context;
+  // const {state: {goods}, actions: {buyGood}} = props.context;
+  const {goods, buyGood} = props;
   return (
     <Fragment>
       <p>All Goods</p>
@@ -29,7 +29,8 @@ function AllGoods (props) {
 }
 
 AllGoods.propTypes = {
-  context: PropTypes.object
+  goods: PropTypes.array,
+  buyGood: PropTypes.func
 };
 
-export default WithApplicationContext(AllGoods);
+export default AllGoods;

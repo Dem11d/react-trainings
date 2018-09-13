@@ -1,10 +1,9 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import {WithApplicationContext} from '../components/ApplicationContext';
-import CartGood from '../elements/CartGood';
+import CartGood from '../../elements/CartGood';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { Navigation } from '../components/NavBar';
+import { Navigation } from '../../elements/Navigation';
 
 const SubmitOrderContainer = styled.div`
   display: flex;
@@ -13,14 +12,19 @@ const SubmitOrderContainer = styled.div`
 `;
 
 const Cart = (props) => {
-  const {state: {buyedGoods, goods}} = props.context;
+  const {cart, goods, discardBuyGood} = props;
+  console.log(props);
   return (
     <div>
       <p>Cart page</p>
-      {buyedGoods.length > 0
+      {cart.length > 0
         ? <Fragment>
-          {buyedGoods.map(cartGood => (
-            <CartGood key={cartGood.id} {...goods.find((good) => good.id === cartGood.id)} {...cartGood}/>
+          {cart.map(cartGood => (
+            <CartGood
+              discardBuyGood={discardBuyGood}
+              key={cartGood.id}
+              {...(goods.find((good) => good.id === cartGood.id))}
+              {...cartGood}/>
           ))}
           <SubmitOrderContainer>
             <Navigation>
@@ -35,7 +39,10 @@ const Cart = (props) => {
 };
 
 Cart.propTypes = {
-  context: PropTypes.object
+  context: PropTypes.object,
+  cart: PropTypes.array,
+  goods: PropTypes.array,
+  discardBuyGood: PropTypes.func
 };
 
-export default WithApplicationContext(Cart);
+export default Cart;
