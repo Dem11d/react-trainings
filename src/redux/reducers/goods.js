@@ -2,7 +2,6 @@ import goods from '../../goods.json';
 import {BUY_GOOD, DISCARD_BUY_GOOD} from '../actionTypes';
 
 const buyGood = (state, payload) => {
-  console.log(payload);
   const {id, quantity} = payload;
 
   let good = state.find(good => good.id === id);
