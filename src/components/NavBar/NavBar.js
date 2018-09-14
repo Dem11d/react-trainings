@@ -11,13 +11,14 @@ const NavBarContainer = styled.div`
 `;
 
 const NavBar = (props) => {
-  const {cart} = props;
+  const {showCartLink} = props;
+  console.log(props);
   return (
     <NavBarContainer>
       <Navigation>
         <Link to="/">All goods</Link>
       </Navigation>
-      {cart.length > 0 && (
+      {showCartLink && (
         <Navigation>
           <Link to="/basket">Show basket</Link>
         </Navigation>)}
@@ -26,7 +27,7 @@ const NavBar = (props) => {
 };
 
 NavBar.propTypes = {
-  cart: PropTypes.array
+  showCartLink: PropTypes.bool
 };
 
 export default NavBar;
