@@ -1,10 +1,18 @@
 import AllGoods from './AllGoodsPage';
 import {connect} from 'react-redux';
 import {buyGood} from '../../redux/actions';
+import {createSelector} from 'reselect';
+
+const goodsSelector = createSelector(
+  ({goods}) => (goods),
+  (goods) => (goods)
+);
 
 const mapStateToProps = state => {
+  console.log('mpsttp', state);
+
   return {
-    goods: state.goods
+    goods: goodsSelector(state)
   };
 };
 

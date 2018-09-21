@@ -1,42 +1,27 @@
-import React from 'react';
-import styled from 'styled-components';
-import defaultImage from './default.gif';
-import PropTypes from 'prop-types';
-import Button from '../Button';
+import {createSelector} from 'reselect';
+import {connect} from 'react-redux';
+import {compose, mapProps} from 'recompose';
 
-const Card = styled.div`
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding:10px;
-    margin:15px;
-    background-color: #999;
-    border: 1px solid #333;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px 0px rgba(0,0,0,.25);
-`;
+import CartGood from './CartGood';
 
-const Thumbnail = styled.img`
-    height:100px;
-`;
+const goodSelector = createSelector(
+  ({goods}) => goods,
+  (state, {goodId}) => goodId,
+  (goods, goodId) => goods.find(good => good.id === goodId)
+);
 
-const CartGood = ({quantity, name, id, discardBuyGood}) => {
-  return (
-    <Card>
-      <Thumbnail src={defaultImage} alt="default image"/>
-      <p>{name}</p>
-      <p>Quantity: {quantity}</p>
-      <p>test text</p>
-      <Button onClick={() => discardBuyGood(id, quantity)}>Delete</Button>
-    </Card>
-  );
-};
+const cartGoodSelector = createSelector(
+  ({cart}) => cart,
+  (state, {goodId}) => goodId,
+  (cart, goodId) => cart.find(good => good.id === goodId)
+);
 
-CartGood.propTypes = {
-  quantity: PropTypes.number,
-  name: PropTypes.string,
-  id: PropTypes.string,
-  discardBuyGood: PropTypes.func
-};
+const mapStateToProps = (state, props) => ({
+  good: goodSelector(state, props),
+  cartGood: cartGoodSelector(state, props)
+});
 
-export default CartGood;
+export default compose(
+  connect(mapStateToProps),
+  mapProps(({good, cartGood, ...rest}) => ({...good, ...cartGood, ...rest}))
+)(CartGood);

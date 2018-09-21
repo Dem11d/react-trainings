@@ -1,11 +1,15 @@
 import Cart from './Cart';
 import {connect} from 'react-redux';
 import {discartBuyGood} from '../../redux/actions';
+import {createSelector} from 'reselect';
+
+const cartSelector = createSelector(
+  ({cart}) => cart,
+  (cart) => cart);
 
 const mapStateToProps = state => {
   return {
-    goods: state.goods,
-    cart: state.cart
+    cart: cartSelector(state)
   };
 };
 

@@ -12,8 +12,7 @@ const SubmitOrderContainer = styled.div`
 `;
 
 const Cart = (props) => {
-  const {cart, goods, discardBuyGood} = props;
-  console.log(props);
+  const {cart, discardBuyGood} = props;
   return (
     <div>
       <p>Cart page</p>
@@ -23,8 +22,8 @@ const Cart = (props) => {
             <CartGood
               discardBuyGood={discardBuyGood}
               key={cartGood.id}
-              {...(goods.find((good) => good.id === cartGood.id))}
-              {...cartGood}/>
+              goodId = {cartGood.id}
+            />
           ))}
           <SubmitOrderContainer>
             <Navigation>

@@ -19,7 +19,7 @@ function AllGoods (props) {
         {goods.map(good => {
           return (
             <div key={good.id}>
-              <Good good={good} onBuy={buyGood}/>
+              <Good goodId={good.id} onBuy={buyGood}/>
             </div>
           );
         })}

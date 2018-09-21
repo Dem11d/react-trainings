@@ -12,7 +12,6 @@ const NavBarContainer = styled.div`
 
 const NavBar = (props) => {
   const {showCartLink} = props;
-  console.log(props);
   return (
     <NavBarContainer>
       <Navigation>
