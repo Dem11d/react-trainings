@@ -20,8 +20,29 @@ const Card = styled.div`
   overflow: hidden;
 `;
 
+const BuyGoodContainer = styled.div`
+  display: flex;
+`;
+
+const BuyGoodPanel = ({good: {id}, onBuy, quantityToBuy, changeQuantity}) => {
+  console.log(quantityToBuy);
+  return (
+    <BuyGoodContainer>
+      <Button onClick={() => onBuy(id, quantityToBuy)}>Buy one</Button>
+    </BuyGoodContainer>
+  );
+};
+
+BuyGoodPanel.propTypes = {
+  good: propTypes.object,
+  onBuy: propTypes.func,
+  quantityToBuy: propTypes.number,
+  changeQuantity: propTypes.func
+};
+
 const Good = (props) => {
-  const {good, onBuy} = props;
+  console.log(props);
+  const {good} = props;
   return (
     <Card>
       <Thumbnail src={defaultImage} alt="default image"/>
@@ -29,7 +50,7 @@ const Good = (props) => {
       <p>{good.description}</p>
       <p>{good.price}$</p>
       {good.quantity === 0 ? <p>Out of stock</p>
-        : <Button onClick={() => onBuy(good.id, 1)}>Buy one</Button>
+        : <BuyGoodPanel {...props}/>
       }
     </Card>
 
@@ -38,7 +59,8 @@ const Good = (props) => {
 
 Good.propTypes = {
   good: propTypes.object,
-  onBuy: propTypes.func
+  onBuy: propTypes.func,
+  changeQuantity: propTypes.func
 };
 
 export default Good;

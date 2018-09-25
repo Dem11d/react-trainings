@@ -20,6 +20,11 @@ const Thumbnail = styled.img`
     height:100px;
 `;
 
+const DeleteGoodButtonContainer = styled.div`
+  max-width: 180px;
+  display:flex;
+`;
+
 const CartGood = ({quantity, name, id, discardBuyGood}) => {
   return (
     <Card>
@@ -27,7 +32,9 @@ const CartGood = ({quantity, name, id, discardBuyGood}) => {
       <p>{name}</p>
       <p>Quantity: {quantity}</p>
       <p>test text</p>
-      <Button onClick={() => discardBuyGood(id, quantity)}>Delete</Button>
+      <DeleteGoodButtonContainer>
+        <Button onClick={() => discardBuyGood(id, quantity)}>Delete</Button>
+      </DeleteGoodButtonContainer>
     </Card>
   );
 };

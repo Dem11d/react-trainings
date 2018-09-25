@@ -1,6 +1,8 @@
 import {connect} from 'react-redux';
 import {createSelector} from 'reselect';
 
+import {compose, withState} from 'recompose';
+
 import Good from './Good';
 
 const goodSelector = createSelector(
@@ -15,4 +17,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch) => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Good);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withState('quantityToBuy', 'changeQuantity', 1)
+)(Good);
