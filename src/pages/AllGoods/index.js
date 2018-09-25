@@ -1,7 +1,10 @@
-import AllGoods from './AllGoodsPage';
 import {connect} from 'react-redux';
-import {buyGood} from '../../redux/actions';
 import {createSelector} from 'reselect';
+import {compose} from 'recompose';
+
+import AllGoods from './AllGoodsPage';
+import {buyGood} from '../../redux/actions';
+import withNavBar from '../../HOCs/withNavBar';
 
 const goodsSelector = createSelector(
   ({goods}) => (goods),
@@ -9,8 +12,6 @@ const goodsSelector = createSelector(
 );
 
 const mapStateToProps = state => {
-  console.log('mpsttp', state);
-
   return {
     goods: goodsSelector(state)
   };
@@ -18,11 +19,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ...other) => {
   return {
-    buyGood: (id, quantity) => dispatch(buyGood(id, quantity))
+    handleBuyGood: (id, quantity) => dispatch(buyGood(id, quantity))
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps),
+  withNavBar
 )(AllGoods);

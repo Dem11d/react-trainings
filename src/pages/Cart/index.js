@@ -1,7 +1,10 @@
-import Cart from './Cart';
 import {connect} from 'react-redux';
-import {discartBuyGood} from '../../redux/actions';
 import {createSelector} from 'reselect';
+import {compose} from 'recompose';
+
+import Cart from './Cart';
+import {discartBuyGood} from '../../redux/actions';
+import withNavBar from '../../HOCs/withNavBar';
 
 const cartSelector = createSelector(
   ({cart}) => cart,
@@ -19,7 +22,10 @@ const mapDispatchToProps = (dispatch, ...other) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  withNavBar
 )(Cart);

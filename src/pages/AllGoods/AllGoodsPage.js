@@ -10,8 +10,7 @@ const GoodsContainer = styled.div`
 `;
 
 function AllGoods (props) {
-  // const {state: {goods}, actions: {buyGood}} = props.context;
-  const {goods, buyGood} = props;
+  const {goods, handleBuyGood} = props;
   return (
     <Fragment>
       <p>All Goods</p>
@@ -19,7 +18,7 @@ function AllGoods (props) {
         {goods.map(good => {
           return (
             <div key={good.id}>
-              <Good goodId={good.id} onBuy={buyGood}/>
+              <Good goodId={good.id} onBuy={handleBuyGood}/>
             </div>
           );
         })}
@@ -30,7 +29,7 @@ function AllGoods (props) {
 
 AllGoods.propTypes = {
   goods: PropTypes.array,
-  buyGood: PropTypes.func
+  handleBuyGood: PropTypes.func
 };
 
 export default AllGoods;
